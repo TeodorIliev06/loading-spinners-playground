@@ -1,58 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Loading Spinner Playground</title>
-  <link rel="stylesheet" href="styles/style.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading Spinner Playground</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <div id="app">
-        <header>
-          <h1>Loading Spinner Playground</h1>
-        </header>
-      
-        <section class="controls">
-          <label>
-            Shape:
-            <select id="shape-select">
-              <option value="dots">Dots</option>
-              <option value="circle">Circle</option>
-              <option value="ring">Ring</option>
-            </select>
-          </label>
-      
-          <label>
-            Size:
-            <input type="range" id="size-slider" min="16" max="128" value="48" />
-          </label>
-      
-          <label>
-            Color:
-            <input type="color" id="color-picker" value="#3498db" />
-          </label>
-      
-          <label>
-            Speed:
-            <input type="range" id="speed-slider" min="0.1" max="5" step="0.1" value="1" />
-          </label>
-        </section>
-      
-        <main class="preview-container">
-          <div id="spinner-preview">
-            <!-- Spinner will render here -->
-          </div>
-        </main>
-      
-        <section class="code-output">
-          <h2>HTML</h2>
-          <pre><code id="html-output">&lt;!-- spinner html --&gt;</code></pre>
-      
-          <h2>CSS</h2>
-          <pre><code id="css-output">/* spinner css */</code></pre>
-        </section>
-      </div>      
+      <header>
+        <h1>Loading Spinner Playground</h1>
+        <p class="subtitle">
+          Create, customize and export CSS loading spinners
+        </p>
+      </header>
 
-  <script src="scripts/main.js"></script>
-</body>
+      <section class="controls">
+        <div class="control-group">
+          <label for="shape-select">Shape</label>
+          <select id="shape-select">
+            <option value="dots">Dots</option>
+            <option value="circle">Circle</option>
+            <option value="ring">Ring</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="size-slider">Size</label>
+          <input type="range" id="size-slider" min="16" max="128" value="48" />
+          <span class="value-display" id="size-value">48px</span>
+        </div>
+
+        <div class="control-group">
+          <label for="color-picker">Color</label>
+          <input type="color" id="color-picker" value="#3498db" />
+        </div>
+
+        <div class="control-group">
+          <label for="speed-slider">Speed</label>
+          <input
+            type="range"
+            id="speed-slider"
+            min="0.1"
+            max="5"
+            step="0.1"
+            value="1"
+          />
+          <span class="value-display" id="speed-value">1s</span>
+        </div>
+      </section>
+
+      <section class="preview-container">
+        <div class="preview-light">
+          <div id="spinner-preview-light"></div>
+        </div>
+        <div class="preview-dark">
+          <div id="spinner-preview-dark"></div>
+        </div>
+      </section>
+
+      <section class="code-output">
+        <div class="code-header">
+          <h2>HTML</h2>
+          <button class="copy-btn" data-target="html-output">Copy</button>
+        </div>
+        <pre><code id="html-output">&lt;!-- spinner html --&gt;</code></pre>
+
+        <div class="code-header">
+          <h2>CSS</h2>
+          <button class="copy-btn" data-target="css-output">Copy</button>
+        </div>
+        <pre><code id="css-output">/* spinner css */</code></pre>
+      </section>
+    </div>
+
+    <script src="scripts/main.js"></script>
+  </body>
 </html>

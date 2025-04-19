@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loading Spinner Playground</title>
     <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/code-editor.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css"
     />
   </head>
   <body>
@@ -64,20 +73,51 @@
       </section>
 
       <section class="code-output">
-        <div class="code-header">
-          <h2>HTML</h2>
-          <button class="copy-btn" data-target="html-output">Copy</button>
+        <div class="code-tabs">
+          <button class="tab-btn active" data-target="preview-tab">
+            Preview
+          </button>
+          <button class="tab-btn" data-target="code-tab">Code Editor</button>
         </div>
-        <pre><code id="html-output">&lt;!-- spinner html --&gt;</code></pre>
 
-        <div class="code-header">
-          <h2>CSS</h2>
-          <button class="copy-btn" data-target="css-output">Copy</button>
+        <div id="preview-tab" class="tab-content active">
+          <div class="code-header">
+            <h2>HTML</h2>
+            <button class="copy-btn" data-target="html-output">Copy</button>
+          </div>
+          <pre><code id="html-output">&lt;!-- spinner html --&gt;</code></pre>
+
+          <div class="code-header">
+            <h2>CSS</h2>
+            <button class="copy-btn" data-target="css-output">Copy</button>
+          </div>
+          <pre><code id="css-output">/* spinner css */</code></pre>
         </div>
-        <pre><code id="css-output">/* spinner css */</code></pre>
+
+        <div id="code-tab" class="tab-content">
+          <div class="editor-container">
+            <div class="code-header">
+              <h2>HTML Editor</h2>
+              <button id="apply-html" class="apply-btn">Apply Changes</button>
+            </div>
+            <div id="html-editor"></div>
+
+            <div class="code-header">
+              <h2>CSS Editor</h2>
+              <button id="apply-css" class="apply-btn">Apply Changes</button>
+            </div>
+            <div id="css-editor"></div>
+          </div>
+        </div>
       </section>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closetag.min.js"></script>
     <script src="scripts/main.js"></script>
+    <script src="scripts/code-editor.js"></script>
   </body>
 </html>

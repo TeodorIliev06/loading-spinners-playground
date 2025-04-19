@@ -269,8 +269,8 @@ input:focus, select:focus {
 .spinner-ring {
   width: 96px;
   height: 96px;
-  border: 5px solid rgba(204, 204, 204, 0.3);
-  border-top-color: #3498db;
+  border: 5px solid var(--secondary-color, rgba(204, 204, 204, 0.3));
+  border-top-color: var(--primary-color, #3498db);
   border-radius: 50%;
   animation: pulse-spin 1s ease-in-out infinite;
 }
@@ -278,13 +278,13 @@ input:focus, select:focus {
 @keyframes pulse-spin {
   0% {
     transform: rotate(0deg);
-    border-top-color: #3498db;
+    border-top-color: var(--primary-color, #3498db);
   }
   50% {
-    border-top-color: #85c1e9;
+    border-top-color: var(--accent-color, #85c1e9);
   }
   100% {
     transform: rotate(360deg);
-    border-top-color: #3498db;
+    border-top-color: var(--primary-color, #3498db);
   }
 }

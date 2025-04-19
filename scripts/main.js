@@ -16,18 +16,18 @@ const shapeSelect = document.getElementById("shape-select");
 const htmlOutput = document.getElementById("html-output");
 const cssOutput = document.getElementById("css-output");
 
-document.querySelectorAll('.copy-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const targetId = btn.getAttribute('data-target');
+document.querySelectorAll(".copy-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const targetId = btn.getAttribute("data-target");
     const textToCopy = document.getElementById(targetId).textContent;
-    
+
     navigator.clipboard.writeText(textToCopy).then(() => {
-      btn.textContent = 'Copied!';
-      btn.classList.add('copied');
-      
+      btn.textContent = "Copied!";
+      btn.classList.add("copied");
+
       setTimeout(() => {
-        btn.textContent = 'Copy';
-        btn.classList.remove('copied');
+        btn.textContent = "Copy";
+        btn.classList.remove("copied");
       }, 2000);
     });
   });
@@ -95,7 +95,7 @@ function renderToContainer(containerId, element) {
 }
 
 function renderDotsSpinner() {
-	renderSpinnerToContainers(createDotsSpinner);
+  renderSpinnerToContainers(createDotsSpinner);
 }
 
 function createDotsSpinner() {
@@ -119,7 +119,7 @@ function createDotsSpinner() {
 }
 
 function renderCircleSpinner() {
-	renderSpinnerToContainers(createCircleSpinner);
+  renderSpinnerToContainers(createCircleSpinner);
 }
 
 function createCircleSpinner() {
@@ -136,7 +136,7 @@ function createCircleSpinner() {
 function renderRingSpinner() {
   const wrapperLight = createRingSpinner(true);
   renderToContainer("spinner-preview-light", wrapperLight);
-  
+
   const wrapperDark = createRingSpinner(false);
   renderToContainer("spinner-preview-dark", wrapperDark);
 }
@@ -148,14 +148,19 @@ function createRingSpinner(isLight = true) {
 
   const borderWidth = Math.max(2, spinnerState.size / 20);
   wrapper.style.borderWidth = `${borderWidth}px`;
-  
+
   // Use the isLight parameter to determine border color
-  const borderColor = isLight 
-    ? "rgba(204, 204, 204, 0.3)" 
-    : "rgba(255, 255, 255, 0.1)";
-    
-  wrapper.style.borderColor = borderColor;
-  wrapper.style.borderTopColor = spinnerState.color;
+  const borderColor = isLight
+    ? addAlpha(spinnerState.color, 0.3)
+    : addAlpha(spinnerState.color, 0.1);
+
+  wrapper.style.setProperty("--primary-color", spinnerState.color);
+  wrapper.style.setProperty(
+    "--accent-color",
+    addAlpha(spinnerState.color, 0.7)
+  );
+  wrapper.style.setProperty("--secondary-color", borderColor);
+
   wrapper.style.animation = `pulse-spin ${spinnerState.speed}s ease-in-out infinite`;
 
   return wrapper;
@@ -163,7 +168,7 @@ function createRingSpinner(isLight = true) {
 
 function updateCodeSnippets() {
   const spinnerCode = generateSpinnerCode(spinnerState);
-  
+
   htmlOutput.textContent = spinnerCode.html;
   cssOutput.textContent = spinnerCode.css;
 }
@@ -175,10 +180,10 @@ function generateSpinnerCode(state) {
     color: state.color,
     speed: state.speed,
   };
-  
+
   let spinner;
-  switch(state.shape) {
-    case 'dots':
+  switch (state.shape) {
+    case "dots":
       spinner = {
         ...baseSpinner,
         dotSize: state.size / 3,
@@ -186,58 +191,58 @@ function generateSpinnerCode(state) {
         delayFactor: state.speed / 3,
       };
       break;
-    case 'circle':
+    case "circle":
       spinner = {
         ...baseSpinner,
         borderWidth: Math.max(2, state.size / 20),
       };
       break;
-    case 'ring':
+    case "ring":
       spinner = {
         ...baseSpinner,
         borderWidth: Math.max(2, state.size / 20),
-        secondaryColor: 'rgba(204, 204, 204, 0.3)',
+        secondaryColor: addAlpha(state.color, 0.3),
         accentColor: addAlpha(state.color, 0.7),
       };
       break;
     default:
-      spinner = {...baseSpinner};
+      spinner = { ...baseSpinner };
   }
-  
+
   return {
     html: generateHTML(spinner),
-    css: generateCSS(spinner)
+    css: generateCSS(spinner),
   };
 }
 
 function generateHTML(spinner) {
-  switch(spinner.type) {
-    case 'dots':
+  switch (spinner.type) {
+    case "dots":
       return `<div class="spinner-dots">
   <div></div>
   <div></div>
   <div></div>
 </div>`;
-    case 'circle':
+    case "circle":
       return `<div class="spinner-circle"></div>`;
-    case 'ring':
+    case "ring":
       return `<div class="spinner-ring"></div>`;
     default:
-      return '<!-- No spinner selected -->';
+      return "<!-- No spinner selected -->";
   }
 }
 
 function generateCSS(spinner) {
   // Generate CSS based on spinner type
-  switch(spinner.type) {
-    case 'dots':
+  switch (spinner.type) {
+    case "dots":
       return generateDotsCSS(spinner);
-    case 'circle':
+    case "circle":
       return generateCircleCSS(spinner);
-    case 'ring':
+    case "ring":
       return generateRingCSS(spinner);
     default:
-      return '/* No spinner selected */';
+      return "/* No spinner selected */";
   }
 }
 
@@ -318,7 +323,7 @@ function generateRingCSS(spinner) {
 
 function addAlpha(color, alpha) {
   // Convert hex to rgb
-  if (color.startsWith('#')) {
+  if (color.startsWith("#")) {
     const r = parseInt(color.slice(1, 3), 16);
     const g = parseInt(color.slice(3, 5), 16);
     const b = parseInt(color.slice(5, 7), 16);

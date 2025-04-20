@@ -1,0 +1,150 @@
+:root {
+  /* Color palette */
+  --primary: #3498db;
+  --primary-light: #85c1e9;
+  --dark: #2c3e50;
+  --light: #f5f7fa;
+  --accent: #e74c3c;
+  --neutral-100: #f0f0f0;
+  --neutral-200: #e0e0e0;
+  --neutral-300: #cccccc;
+  --neutral-800: #333333;
+  --code-bg: #1e1e1e;
+
+  /* Spacing */
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1024px) {
+  #app {
+    max-width: 95%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .preview-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .controls {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+
+  .code-header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    align-items: flex-start;
+  }
+
+  .copy-btn {
+    align-self: flex-end;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    padding: var(--spacing-sm);
+  }
+
+  .controls {
+    grid-template-columns: 1fr;
+    padding: var(--spacing-sm);
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  header .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .spinner-dots div {
+    width: 18px;
+    height: 18px;
+  }
+
+  .spinner-circle,
+  .spinner-ring {
+    width: 80px;
+    height: 80px;
+  }
+
+  .CodeMirror {
+    height: 150px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #app {
+    gap: var(--spacing-md);
+  }
+
+  pre {
+    padding: var(--spacing-sm);
+  }
+
+  .spinner-dots div {
+    width: 14px;
+    height: 14px;
+  }
+
+  .spinner-circle,
+  .spinner-ring {
+    width: 60px;
+    height: 60px;
+    border-width: 4px;
+  }
+
+  .CodeMirror-sizer {
+    margin-left: 30px !important;
+  }
+
+  .CodeMirror-gutters {
+    width: 30px !important;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --light: #1a1a1a;
+    --dark: #f5f7fa;
+    --neutral-100: #2a2a2a;
+    --neutral-200: #3a3a3a;
+    --neutral-300: #444444;
+    --neutral-800: #cccccc;
+    --code-bg: #121212;
+  }
+
+  body {
+    background-color: var(--light);
+    color: var(--dark);
+  }
+
+  .preview-light {
+    background-color: #2a2a2a;
+  }
+
+  .preview-dark {
+    background-color: #121212;
+  }
+
+  .controls {
+    background-color: #222222;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+}

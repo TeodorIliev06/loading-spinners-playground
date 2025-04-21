@@ -10,17 +10,17 @@
   --neutral-300: #cccccc;
   --neutral-800: #333333;
   --code-bg: #1e1e1e;
-  
+
   /* Spacing */
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 2rem;
-  
+
   /* Border radius */
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
-  
+
   /* Transitions */
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
@@ -34,7 +34,7 @@
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   background-color: var(--light);
   color: var(--dark);
   line-height: 1.6;
@@ -73,7 +73,7 @@ header .subtitle {
   padding: var(--spacing-md);
   background-color: white;
   border-radius: var(--radius-lg);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .control-group {
@@ -99,14 +99,16 @@ header .subtitle {
 }
 
 /* Form controls styling */
-select, input[type="range"] {
+select,
+input[type="range"] {
   padding: 8px 12px;
   border: 1px solid var(--neutral-300);
   border-radius: var(--radius-sm);
   transition: border-color var(--transition-fast);
 }
 
-select:focus, input:focus {
+select:focus,
+input:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
@@ -129,10 +131,11 @@ input[type="color"] {
   min-height: 250px;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.preview-light, .preview-dark {
+.preview-light,
+.preview-dark {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -153,7 +156,7 @@ input[type="color"] {
   color: #e0e0e0;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .code-header {
@@ -161,7 +164,7 @@ input[type="color"] {
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-sm) var(--spacing-md);
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .code-header h2 {
@@ -171,7 +174,7 @@ input[type="color"] {
 
 .copy-btn {
   background-color: transparent;
-  border: 1px solid rgba(255,255,255,0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   color: white;
   padding: 4px 10px;
   border-radius: var(--radius-sm);
@@ -181,7 +184,7 @@ input[type="color"] {
 }
 
 .copy-btn:hover {
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-1px);
 }
 
@@ -190,31 +193,59 @@ input[type="color"] {
   border-color: #2ecc71;
 }
 
+ /* Set Monokai theme */
 pre {
   padding: var(--spacing-md);
   margin: 0;
-  overflow-x: auto;
+  overflow: auto;
+  max-height: 300px;
+  background-color: #272822;
+  color: #f8f8f2;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+code {
+  display: block;
+  counter-reset: line;
+  white-space: pre;
 }
 
 /* Micro-interactions */
-button, select {
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+button,
+select {
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
-button:hover, select:hover {
+button:hover,
+select:hover {
   transform: translateY(-1px);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Animation refinements for form elements */
-input:focus, select:focus {
-  animation: subtle-pulse 1.5s infinite;
+select:focus,
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+input:focus,
+select:focus {
+  animation: subtle-pulse 1.5s 1 forwards;
 }
 
 @keyframes subtle-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4); }
-  70% { box-shadow: 0 0 0 4px rgba(52, 152, 219, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0);
+  }
+  100% {
+    box-shadow: none;
+  }
 }
 
 /* Spinner Styles */

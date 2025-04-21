@@ -25,14 +25,34 @@
 }
 
 .tab-content.active {
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
 }
 
-/* Editor styling */
-.editor-container {
+.code-section {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  background-color: var(--code-bg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.editor-container {
+  display: contents;
+}
+
+.CodeMirror {
+  padding: 0px !important;
+  height: 250px;
+  border-radius: var(--radius-sm);
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 4px 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .CodeMirror {

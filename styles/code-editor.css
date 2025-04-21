@@ -43,21 +43,16 @@
   display: contents;
 }
 
+#html-editor,
+#css-editor,
 .CodeMirror {
-  padding: 0px !important;
-  height: 250px;
-  border-radius: var(--radius-sm);
-  font-family: "Fira Code", monospace;
-  font-size: 14px;
-  line-height: 1.5;
-  padding: 4px 0;
+  height: 300px;
   width: 100%;
-  box-sizing: border-box;
 }
 
 .CodeMirror {
   padding: 0px !important;
-  height: 200px;
+  height: 250px;
   border-radius: var(--radius-sm);
   font-family: "Fira Code", monospace;
   font-size: 14px;

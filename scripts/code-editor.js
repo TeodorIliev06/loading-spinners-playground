@@ -109,10 +109,39 @@ function applyCustomCss(css) {
     }
 
     styleElement.textContent = css;
-
     document.getElementById("css-output").textContent = css;
+
+    parseAndUpdateColorFromCss(css);
+
   } catch (error) {
     console.error("Error applying CSS:", error);
     alert("Invalid CSS. Please check your code.");
+  }
+}
+
+function parseAndUpdateColorFromCss(css) {
+  const colorPatterns = [
+    /background-color:\s*(#[0-9a-fA-F]{6}|#[0-9a-fA-F]{3})/i,  // For dots spinner
+    /border-top-color:\s*(#[0-9a-fA-F]{6}|#[0-9a-fA-F]{3})/i,  // For circle/ring spinner
+    /border-top:\s*[^;]*?(#[0-9a-fA-F]{6}|#[0-9a-fA-F]{3})/i   // Alternative border-top format
+  ];
+
+  let foundColor = null;
+
+  for (const pattern of colorPatterns) {
+    const match = css.match(pattern);
+    if (match && match[1]) {
+      foundColor = match[1];
+      break;
+    }
+  }
+
+  if (foundColor && isValidHexColor(foundColor)) {
+    spinnerState.color = foundColor;
+    
+    const colorPicker = document.getElementById("color-picker");
+    colorPicker.value = foundColor;
+    
+    updateSpinner();
   }
 }

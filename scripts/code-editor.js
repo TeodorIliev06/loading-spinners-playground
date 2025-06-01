@@ -111,7 +111,7 @@ function applyCustomCss(css) {
     styleElement.textContent = css;
     document.getElementById("css-output").textContent = css;
 
-    parseAndUpdateColorFromCss(css);
+    parseAndUpdateFromCss(css);
 
   } catch (error) {
     console.error("Error applying CSS:", error);
@@ -119,7 +119,9 @@ function applyCustomCss(css) {
   }
 }
 
-function parseAndUpdateColorFromCss(css) {
+function parseAndUpdateFromCss(css) {
+  let needsUpdate = false;
+
   const colorPatterns = [
     /background-color:\s*(#[0-9a-fA-F]{6}|#[0-9a-fA-F]{3})/i,  // For dots spinner
     /border-top-color:\s*(#[0-9a-fA-F]{6}|#[0-9a-fA-F]{3})/i,  // For circle/ring spinner
@@ -127,7 +129,6 @@ function parseAndUpdateColorFromCss(css) {
   ];
 
   let foundColor = null;
-
   for (const pattern of colorPatterns) {
     const match = css.match(pattern);
     if (match && match[1]) {
@@ -138,10 +139,73 @@ function parseAndUpdateColorFromCss(css) {
 
   if (foundColor && isValidHexColor(foundColor)) {
     spinnerState.color = foundColor;
-    
+
     const colorPicker = document.getElementById("color-picker");
     colorPicker.value = foundColor;
+
+    needsUpdate = true;
+  }
+
+  const speedPatterns = [
+    /animation:\s*[^;]*?(\d+(?:\.\d+)?)s/i,
+    /animation-duration:\s*(\d+(?:\.\d+)?)s/i,
+  ];
+
+  let foundSpeed = null;
+  for (const pattern of speedPatterns) {
+    const match = css.match(pattern);
+    if (match && match[1]) {
+      foundSpeed = parseFloat(match[1]);
+      break;
+    }
+  }
+
+  if (foundSpeed && foundSpeed >= 0.1 && foundSpeed <= 5) {
+    spinnerState.speed = foundSpeed;
+
+    const speedSlider = document.getElementById("speed-slider");
+    const speedValueLabel = document.getElementById("speed-value");
+    speedSlider.value = foundSpeed;
+    speedValueLabel.textContent = `${foundSpeed.toFixed(1)}s`;
+
+    updateSliderBackground(speedSlider);
+    needsUpdate = true;
+  }
+
+  const sizePatterns = [
+    /width:\s*(\d+)px/i,
+    /height:\s*(\d+)px/i,
+  ];
+
+  let foundSize = null;
+  for (const pattern of sizePatterns) {
+    const match = css.match(pattern);
+    if (match && match[1]) {
+      let parsedSize = parseInt(match[1]);
+      
+      // For dots spinner multiply by 3 to get actual spinner size
+      if (spinnerState.shape === 'dots') {
+        parsedSize = parsedSize * 3;
+      }
+      
+      foundSize = parsedSize;
+      break;
+    }
+  }
+
+  if (foundSize && foundSize >= 16 && foundSize <= 128) {
+    spinnerState.size = foundSize;
+
+    const sizeSlider = document.getElementById("size-slider");
+    const sizeValueLabel = document.getElementById("size-value");
+    sizeSlider.value = foundSize;
+    sizeValueLabel.textContent = `${foundSize}px`;
     
+    updateSliderBackground(sizeSlider);
+    needsUpdate = true;
+  }
+
+  if (needsUpdate) {
     updateSpinner();
   }
 }

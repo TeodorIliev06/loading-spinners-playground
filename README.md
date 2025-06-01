@@ -26,5 +26,5 @@ A simple project demonstrating how to create a custom loading spinner with HTML,
 
 ```bash
 git clone https://github.com/TeodorIliev06/loading-spinners-playground.git
-cd spinner-project
+cd loading-spinners-playground
 open index.html
